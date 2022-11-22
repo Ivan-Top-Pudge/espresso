@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
-        con = sqlite3.connect('coffee.db')
+        con = sqlite3.connect('data/coffee.db')
         cur = con.cursor()
 
         result = cur.execute("""
@@ -174,7 +174,7 @@ class addEditCoffeeForm(QtWidgets.QWidget, Ui_addEditCoffee):
 
     def loadItem(self):
         self.tableWidget.clearContents()
-        con = sqlite3.connect("coffee.db")
+        con = sqlite3.connect("data/coffee.db")
         cur = con.cursor()
         result = cur.execute(f"""
         select * from coffee     
@@ -221,7 +221,7 @@ class addEditCoffeeForm(QtWidgets.QWidget, Ui_addEditCoffee):
 
     def save_result(self):
         if self.modified:
-            con = sqlite3.connect('coffee.db')
+            con = sqlite3.connect('data/coffee.db')
             cur = con.cursor()
             changes = ", ".join([f"{key}='{self.modified.get(key)}'" for key in self.modified.keys()])
             cur.execute(f"""UPDATE coffee SET\n
